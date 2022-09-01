@@ -33,6 +33,7 @@ local options = {
   scrolloff = 8,                           -- is one of my fav
   sidescrolloff = 8,
   guifont = "DroidSansMono Nerd Font",               -- the font used in graphical neovim applications
+  colorcolumn = {80},                      -- vertical column to show where wrapping should occur
 }
 
 vim.opt.shortmess:append "c"
