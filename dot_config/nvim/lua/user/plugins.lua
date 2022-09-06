@@ -95,6 +95,12 @@ return packer.startup(function(use)
   -- Harpoon
   use('ThePrimeagen/harpoon')
 
+  -- Diffview
+  use({ 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' })
+
+  -- Neogit
+  use({ 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' })
+
   -- Treesitter
   use({
     'nvim-treesitter/nvim-treesitter',
