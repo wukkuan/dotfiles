@@ -5,4 +5,5 @@ vim.g.neoformat_try_node_exe = 1
 -- npm update -g @fsouza/prettierd
 vim.cmd([[
   autocmd BufWritePre *.js Neoformat prettierd
+  autocmd BufWritePre *.lua Neoformat stylua
 ]])
