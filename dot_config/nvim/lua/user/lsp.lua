@@ -3,26 +3,25 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-require'lspconfig'.flow.setup{
-  cmd={"node_modules/.bin/flow", "lsp"},
+require('lspconfig').flow.setup({
+  cmd = { 'node_modules/.bin/flow', 'lsp' },
   capabilities = capabilities,
-}
+})
 
 -- Run the following to stay up to date
 -- npm update -g vscode-langservers-extracted
-require'lspconfig'.eslint.setup{}
-vim.cmd [[
+require('lspconfig').eslint.setup({})
+vim.cmd([[
   autocmd BufWritePre *.js EslintFixAll
-]]
+]])
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 --vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 --vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 --vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 --vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -32,7 +31,7 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   --vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   --vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   --vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -41,7 +40,7 @@ local on_attach = function(client, bufnr)
   --vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   --vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
   --vim.keymap.set('n', '<space>wl', function()
-    --print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  --print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   --end, bufopts)
   --vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
   --vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
@@ -52,18 +51,18 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 
-  'pyright', 
+local servers = {
+  'pyright',
   'rust_analyzer',
   'flow',
---  'tsserver',
+  --  'tsserver',
 }
 for _, lsp in pairs(servers) do
-  require('lspconfig')[lsp].setup {
+  require('lspconfig')[lsp].setup({
     on_attach = on_attach,
     flags = {
       -- This will be the default in neovim 0.7+
       debounce_text_changes = 150,
-    }
-  }
+    },
+  })
 end
