@@ -102,7 +102,7 @@ local mappings = {
     name = 'Files',
     t = { '<cmd>let @* = expand("%")<cr>', 'Copy current filename' },
     ['/'] = {
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, path_display = 'smart'})<cr>",
+      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, path_display = {'smart'}})<cr>",
       'Find files',
     },
   },
