@@ -32,7 +32,7 @@ local options = {
   wrap = false, -- display lines as one long line
   scrolloff = 8, -- is one of my fav
   sidescrolloff = 8,
-  guifont = 'DroidSansMono Nerd Font', -- the font used in graphical neovim applications
+  guifont = 'FiraCode Nerd Font Mono', -- the font used in graphical neovim applications
   colorcolumn = { 80 }, -- vertical column to show where wrapping should occur
 }
 
