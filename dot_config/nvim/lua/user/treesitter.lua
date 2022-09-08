@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 configs.setup({
-  ensure_installed = { 'javascript' }, -- one of "all", or a list of languages
+  ensure_installed = { 'javascript', 'lua', 'query' }, -- one of "all", or a list of languages
   ignore_install = { 'phpdoc' }, -- List of parsers to ignore installing
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
   autopairs = {
@@ -13,7 +13,7 @@ configs.setup({
   highlight = {
     enable = true, -- false will disable the whole extension
     disable = { '' }, -- list of language that will be disabled
-    additional_vim_regex_highlighting = true,
+    additional_vim_regex_highlighting = {},
   },
   indent = { enable = true, disable = { 'yaml' } },
   context_commentstring = {
@@ -21,3 +21,7 @@ configs.setup({
     enable_autocmd = false,
   },
 })
+
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldlevel = 99999
