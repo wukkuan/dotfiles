@@ -111,6 +111,8 @@ return packer.startup(function(use)
   --use "JoosepAlviste/nvim-ts-context-commentstring"
   use('tpope/vim-unimpaired')
 
+  use('folke/trouble.nvim')
+
   -- Git
   --use "lewis6991/gitsigns.nvim"
 
