@@ -106,10 +106,6 @@ local mappings = {
       'Find files',
     },
   },
-  ['P'] = {
-    "<cmd>lua require('telescope').extensions.projects.projects()<cr>",
-    'Projects',
-  },
   t = { '<cmd>Telescope resume<cr>', 'Telescope resume' },
 
   p = {
