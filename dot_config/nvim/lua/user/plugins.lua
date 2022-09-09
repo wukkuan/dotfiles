@@ -113,6 +113,8 @@ return packer.startup(function(use)
 
   use('folke/trouble.nvim')
 
+  use('phaazon/hop.nvim')
+
   -- Git
   --use "lewis6991/gitsigns.nvim"
 
