@@ -114,6 +114,8 @@ return packer.startup(function(use)
 
   use('phaazon/hop.nvim')
 
+  use('j-hui/fidget.nvim')
+
   -- Git
   --use "lewis6991/gitsigns.nvim"
 
