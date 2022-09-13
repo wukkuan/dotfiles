@@ -107,7 +107,7 @@ return packer.startup(function(use)
   })
   use('nvim-treesitter/playground')
   use('nvim-treesitter/nvim-treesitter-context')
-  --use "JoosepAlviste/nvim-ts-context-commentstring"
+  use('JoosepAlviste/nvim-ts-context-commentstring')
   use('tpope/vim-unimpaired')
 
   use('folke/trouble.nvim')
