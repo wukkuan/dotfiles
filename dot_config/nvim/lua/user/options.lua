@@ -26,12 +26,12 @@ local options = {
   tabstop = 2, -- insert 2 spaces for a tab
   cursorline = true, -- highlight the current line
   number = true, -- set numbered lines
-  relativenumber = false, -- set relative numbered lines
-  numberwidth = 4, -- set number column width to 2 {default 4}
+  relativenumber = true, -- set relative numbered lines
+  numberwidth = 2, -- set number column width to 2 {default 4}
   signcolumn = 'yes', -- always show the sign column, otherwise it would shift the text each time
   wrap = false, -- display lines as one long line
-  scrolloff = 8, -- is one of my fav
-  sidescrolloff = 8,
+  scrolloff = 4, -- is one of my fav
+  sidescrolloff = 4,
   guifont = 'FiraCode Nerd Font Mono', -- the font used in graphical neovim applications
   colorcolumn = { 80 }, -- vertical column to show where wrapping should occur
 }
