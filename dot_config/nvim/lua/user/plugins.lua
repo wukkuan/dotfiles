@@ -1,3 +1,6 @@
+-- Possibly required for luarocks
+vim.fn.setenv('MACOSX_DEPLOYMENT_TARGET', '12.5')
+
 local fn = vim.fn
 
 -- Automatically install packer
@@ -35,6 +38,10 @@ packer.init({
     open_fn = function()
       return require('packer.util').float({ border = 'rounded' })
     end,
+  },
+  luarocks = {
+    -- macOS uses `python3` instead of `python`
+    python_cmd = 'python3',
   },
 })
 
@@ -91,6 +98,10 @@ return packer.startup(function(use)
 
   -- Telescope
   use('nvim-telescope/telescope.nvim')
+  use({
+    'camspiers/snap',
+    rocks = { 'fzy' },
+  })
 
   -- Harpoon
   use('ThePrimeagen/harpoon')

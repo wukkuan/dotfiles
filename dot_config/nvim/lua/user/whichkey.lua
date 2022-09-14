@@ -105,6 +105,20 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, path_display = {'smart'}})<cr>",
       'Find files',
     },
+    f = {
+      function()
+        local snap = require('snap')
+        snap.run({
+          producer = snap.get('consumer.fzy')(
+            snap.get('producer.ripgrep.file')
+          ),
+          select = snap.get('select.file').select,
+          multiselect = snap.get('select.file').multiselect,
+          views = { snap.get('preview.file') },
+        })
+      end,
+      'Find files with snap',
+    },
   },
   t = { '<cmd>Telescope resume<cr>', 'Telescope resume' },
 
@@ -176,6 +190,18 @@ local mappings = {
       'Find Text',
     },
     f = { '<cmd>Telescope live_grep theme=ivy<cr>', 'Find Text' },
+    s = {
+      function()
+        local snap = require('snap')
+        snap.run({
+          producer = snap.get('producer.ripgrep.vimgrep'),
+          select = snap.get('select.vimgrep').select,
+          multiselect = snap.get('select.vimgrep').multiselect,
+          views = { snap.get('preview.vimgrep') },
+        })
+      end,
+      'Snap Live Ripgrep',
+    },
   },
 
   --  t = {
