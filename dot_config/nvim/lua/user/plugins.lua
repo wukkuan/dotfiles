@@ -56,7 +56,7 @@ return packer.startup(function(use)
   use('kyazdani42/nvim-tree.lua')
   use('sbdchd/neoformat')
   --use "akinsho/bufferline.nvim"
-  --use "moll/vim-bbye"
+  use('moll/vim-bbye')
   --use "nvim-lualine/lualine.nvim"
   --use "akinsho/toggleterm.nvim"
   --use "ahmedkhalf/project.nvim"
