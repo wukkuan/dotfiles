@@ -10,4 +10,18 @@ end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
-nvim_tree.setup({})
+nvim_tree.setup({
+  update_focused_file = {
+    enable = true,
+  },
+  renderer = {
+    highlight_opened_files = 'name',
+    indent_markers = {
+      enable = true,
+    },
+  },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = true,
+  },
+})
