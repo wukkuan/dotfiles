@@ -119,6 +119,14 @@ local mappings = {
       end,
       'Find files with snap',
     },
+    w = {
+      '<cmd>w<cr>',
+      'Write',
+    },
+    s = {
+      '<cmd>source %<cr>',
+      ':source %',
+    },
   },
   t = { '<cmd>Telescope resume<cr>', 'Telescope resume' },
 
