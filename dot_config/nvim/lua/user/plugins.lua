@@ -128,6 +128,12 @@ return packer.startup(function(use)
 
   use('j-hui/fidget.nvim')
 
+  use({
+    'akinsho/bufferline.nvim',
+    tag = 'v2.*',
+    requires = 'kyazdani42/nvim-web-devicons',
+  })
+
   -- Git
   --use "lewis6991/gitsigns.nvim"
 
