@@ -109,9 +109,6 @@ return packer.startup(function(use)
   -- Diffview
   use({ 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' })
 
-  -- Neogit
-  use({ 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' })
-
   -- Treesitter
   use({
     'nvim-treesitter/nvim-treesitter',
@@ -134,8 +131,16 @@ return packer.startup(function(use)
     requires = 'kyazdani42/nvim-web-devicons',
   })
 
+  use({
+    'glacambre/firenvim',
+    run = function()
+      vim.fn['firenvim#install'](0)
+    end,
+  })
+
   -- Git
-  --use "lewis6991/gitsigns.nvim"
+  use({ 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' })
+  use('lewis6991/gitsigns.nvim')
 
   use('https://git.sr.ht/~whynothugo/lsp_lines.nvim')
 
