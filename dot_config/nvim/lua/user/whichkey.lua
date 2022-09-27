@@ -106,7 +106,7 @@ local mappings = {
       'Workspace Symbols',
     },
     r = { vim.lsp.buf.rename, 'Rename' },
-    f = { '<cmd>lua vim.lsp.buf.formatting()<cr>', 'Format' },
+    f = { vim.lsp.buf.formatting, 'Format' },
     i = { '<cmd>LspInfo<cr>', 'Info' },
     j = {
       vim.lsp.diagnostic.goto_next,
