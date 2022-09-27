@@ -3,6 +3,215 @@ if not status_ok then
   return
 end
 
+local mappings = {
+  ['b'] = {
+    name = 'Buffers',
+    b = {
+      "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+      'Buffers',
+    },
+    c = { '<cmd>Bdelete!<CR>', 'Close Buffer' },
+  },
+  ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
+  ['w'] = { '<cmd>w!<CR>', 'Save' },
+  ['q'] = {
+    name = 'Macros',
+    q = { '<cmd>normal @q<CR>', '@q' },
+  },
+  z = {
+    name = 'Toggles',
+    h = { '<cmd>nohlsearch<CR>', 'No Highlight' },
+    l = { '<cmd>lua require("lsp_lines").toggle()<CR>', 'LSP Lines' },
+  },
+  ['f'] = {
+    name = 'Files',
+    t = { '<cmd>let @* = expand("%")<cr>', 'Copy current filename' },
+    ['/'] = {
+      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, path_display = {'smart'}})<cr>",
+      'Find files',
+    },
+    f = {
+      function()
+        local snap = require('snap')
+        snap.run({
+          producer = snap.get('consumer.fzy')(
+            snap.get('producer.ripgrep.file')
+          ),
+          select = snap.get('select.file').select,
+          multiselect = snap.get('select.file').multiselect,
+          views = { snap.get('preview.file') },
+        })
+      end,
+      'Find files with snap',
+    },
+    w = {
+      '<cmd>w<cr>',
+      'Write',
+    },
+    s = {
+      '<cmd>source %<cr>',
+      ':source %',
+    },
+  },
+  t = { '<cmd>Telescope resume<cr>', 'Telescope resume' },
+
+  p = {
+    name = 'Packer',
+    c = { '<cmd>PackerCompile<cr>', 'Compile' },
+    i = { '<cmd>PackerInstall<cr>', 'Install' },
+    s = { '<cmd>PackerSync<cr>', 'Sync' },
+    S = { '<cmd>PackerStatus<cr>', 'Status' },
+    u = { '<cmd>PackerUpdate<cr>', 'Update' },
+  },
+
+  g = {
+    name = 'Git',
+    s = { '<cmd>Neogit<CR>', 'Neogit status' },
+  },
+
+  w = {
+    name = 'Window',
+    h = { '<C-w>h', 'left' },
+    l = { '<C-w>l', 'right' },
+    j = { '<C-w>j', 'down' },
+    k = { '<C-w>k', 'up' },
+    v = { '<C-w>v', 'split vertical ' },
+    s = { '<C-w>s', 'split horizontal ' },
+    ['='] = { '<C-w>=', 'balance splits' },
+    q = { '<C-w>q', 'quit window' },
+  },
+
+  l = {
+    name = 'LSP',
+    a = { '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Code Action' },
+    --    d = {
+    --      "<cmd>Telescope lsp_document_diagnostics<cr>",
+    --      "Document Diagnostics",
+    --    },
+    --    w = {
+    --      "<cmd>Telescope lsp_workspace_diagnostics<cr>",
+    --      "Workspace Diagnostics",
+    --    },
+    --    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+    --    i = { "<cmd>LspInfo<cr>", "Info" },
+    --    I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
+    --    j = {
+    --      "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
+    --      "Next Diagnostic",
+    --    },
+    --    k = {
+    --      "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
+    --      "Prev Diagnostic",
+    --    },
+    --    l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+    --    q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
+    --    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+    --    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+    --    S = {
+    --      "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+    --      "Workspace Symbols",
+    --    },
+  },
+  s = {
+    name = 'Search',
+    b = { '<cmd>Telescope git_branches<cr>', 'Checkout branch' },
+    c = { '<cmd>Telescope colorscheme<cr>', 'Colorscheme' },
+    h = { '<cmd>Telescope help_tags<cr>', 'Find Help' },
+    M = { '<cmd>Telescope man_pages<cr>', 'Man Pages' },
+    r = { '<cmd>Telescope oldfiles<cr>', 'Open Recent File' },
+    R = { '<cmd>Telescope registers<cr>', 'Registers' },
+    k = { '<cmd>Telescope keymaps<cr>', 'Keymaps' },
+    C = { '<cmd>Telescope commands<cr>', 'Commands' },
+    F = {
+      "<cmd>lua require('telescope.builtin').live_grep({path_display = {'smart'}, theme='ivy'})<cr>",
+      'Find Text',
+    },
+    f = { '<cmd>Telescope live_grep theme=ivy<cr>', 'Find Text' },
+    s = {
+      function()
+        local snap = require('snap')
+        -- snap.run({
+        --   producer = snap.get('producer.ripgrep.vimgrep'),
+        --   select = snap.get('select.vimgrep').select,
+        --   multiselect = snap.get('select.vimgrep').multiselect,
+        --   views = { snap.get('preview.vimgrep') },
+        -- })
+        snap.run({
+          producer = snap.get('consumer.fzf')(
+            snap.get('consumer.combine')(
+              snap.get('producer.ripgrep.file').args({}, './lua/user')
+            )
+          ),
+          select = snap.get('select.file').select,
+          multiselect = snap.get('select.file').multiselect,
+          views = { snap.get('preview.file') },
+        })
+      end,
+      'Snap Live Ripgrep',
+    },
+    z = {
+      function()
+        -- Prompt for a directory and a file pattern. This could use some
+        -- improvement. Can we make the directory a pattern instead of a
+        -- literal directory? Or at least can we accept multiple directories?
+
+        -- These don't need to be globals, but it's slightly easier to meh
+        if wb__fancy_grep_dir == nil then
+          wb__fancy_grep_dir = './'
+        end
+        if wb__fancy_grep_glob_pattern == nil then
+          wb__fancy_grep_glob_pattern = '*'
+        end
+        vim.ui.input({
+          prompt = 'Directory: ',
+          default = wb__fancy_grep_dir,
+          completion = 'dir',
+        }, function(dir)
+          dir = vim.trim(dir or '')
+          if dir == '' then
+            return
+          end
+          wb__fancy_grep_dir = dir
+
+          vim.ui.input({
+            prompt = 'File glob pattern: ',
+            default = wb__fancy_grep_glob_pattern,
+          }, function(pattern)
+            pattern = vim.trim(pattern or '')
+            wb__fancy_grep_glob_pattern = pattern
+            if pattern == '' or pattern == '*' then
+              pattern = nil
+              wb__fancy_grep_glob_pattern = '*'
+            end
+
+            patterns = {}
+            for p in string.gmatch(pattern, '[^,]+') do
+              table.insert(patterns, p)
+              print('pattern', p)
+            end
+            require('telescope.builtin').live_grep({
+              search_dirs = { dir },
+              glob_pattern = patterns,
+            })
+          end)
+        end)
+      end,
+      'Fancy live grep',
+    },
+  },
+
+  --  t = {
+  --    name = "Terminal",
+  --    n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
+  --    u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
+  --    t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
+  --    p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
+  --    f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+  --    h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+  --    v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+  --  },
+}
+
 local setup = {
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
@@ -76,152 +285,6 @@ local opts = {
   silent = true, -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
   nowait = true, -- use `nowait` when creating keymaps
-}
-
-local mappings = {
-  ['b'] = {
-    name = 'Buffers',
-    b = {
-      "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-      'Buffers',
-    },
-    c = { '<cmd>Bdelete!<CR>', 'Close Buffer' },
-  },
-  ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
-  ['w'] = { '<cmd>w!<CR>', 'Save' },
-  ['q'] = {
-    name = 'Macros',
-    q = { '<cmd>normal @q<CR>', '@q' },
-  },
-  z = {
-    name = 'Toggles',
-    h = { '<cmd>nohlsearch<CR>', 'No Highlight' },
-    l = { '<cmd>lua require("lsp_lines").toggle()<CR>', 'LSP Lines' },
-  },
-  ['f'] = {
-    name = 'Files',
-    t = { '<cmd>let @* = expand("%")<cr>', 'Copy current filename' },
-    ['/'] = {
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, path_display = {'smart'}})<cr>",
-      'Find files',
-    },
-    f = {
-      function()
-        local snap = require('snap')
-        snap.run({
-          producer = snap.get('consumer.fzy')(
-            snap.get('producer.ripgrep.file')
-          ),
-          select = snap.get('select.file').select,
-          multiselect = snap.get('select.file').multiselect,
-          views = { snap.get('preview.file') },
-        })
-      end,
-      'Find files with snap',
-    },
-    w = {
-      '<cmd>w<cr>',
-      'Write',
-    },
-    s = {
-      '<cmd>source %<cr>',
-      ':source %',
-    },
-  },
-  t = { '<cmd>Telescope resume<cr>', 'Telescope resume' },
-
-  p = {
-    name = 'Packer',
-    c = { '<cmd>PackerCompile<cr>', 'Compile' },
-    i = { '<cmd>PackerInstall<cr>', 'Install' },
-    s = { '<cmd>PackerSync<cr>', 'Sync' },
-    S = { '<cmd>PackerStatus<cr>', 'Status' },
-    u = { '<cmd>PackerUpdate<cr>', 'Update' },
-  },
-
-  g = {
-    name = 'Git',
-    s = { '<cmd>Neogit<CR>', 'Neogit status' },
-  },
-
-  w = {
-    name = 'Window',
-    h = { '<C-w>h', 'left' },
-    l = { '<C-w>l', 'right' },
-    j = { '<C-w>j', 'down' },
-    k = { '<C-w>k', 'up' },
-  },
-
-  l = {
-    name = 'LSP',
-    a = { '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Code Action' },
-    --    d = {
-    --      "<cmd>Telescope lsp_document_diagnostics<cr>",
-    --      "Document Diagnostics",
-    --    },
-    --    w = {
-    --      "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-    --      "Workspace Diagnostics",
-    --    },
-    --    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
-    --    i = { "<cmd>LspInfo<cr>", "Info" },
-    --    I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-    --    j = {
-    --      "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
-    --      "Next Diagnostic",
-    --    },
-    --    k = {
-    --      "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
-    --      "Prev Diagnostic",
-    --    },
-    --    l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-    --    q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-    --    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-    --    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-    --    S = {
-    --      "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-    --      "Workspace Symbols",
-    --    },
-  },
-  s = {
-    name = 'Search',
-    b = { '<cmd>Telescope git_branches<cr>', 'Checkout branch' },
-    c = { '<cmd>Telescope colorscheme<cr>', 'Colorscheme' },
-    h = { '<cmd>Telescope help_tags<cr>', 'Find Help' },
-    M = { '<cmd>Telescope man_pages<cr>', 'Man Pages' },
-    r = { '<cmd>Telescope oldfiles<cr>', 'Open Recent File' },
-    R = { '<cmd>Telescope registers<cr>', 'Registers' },
-    k = { '<cmd>Telescope keymaps<cr>', 'Keymaps' },
-    C = { '<cmd>Telescope commands<cr>', 'Commands' },
-    F = {
-      "<cmd>lua require('telescope.builtin').live_grep({path_display = {'smart'}, theme='ivy'})<cr>",
-      'Find Text',
-    },
-    f = { '<cmd>Telescope live_grep theme=ivy<cr>', 'Find Text' },
-    s = {
-      function()
-        local snap = require('snap')
-        snap.run({
-          producer = snap.get('producer.ripgrep.vimgrep'),
-          select = snap.get('select.vimgrep').select,
-          multiselect = snap.get('select.vimgrep').multiselect,
-          views = { snap.get('preview.vimgrep') },
-        })
-      end,
-      'Snap Live Ripgrep',
-    },
-  },
-
-  --  t = {
-  --    name = "Terminal",
-  --    n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-  --    u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
-  --    t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-  --    p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
-  --    f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-  --    h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-  --    v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-  --  },
 }
 
 which_key.setup(setup)
