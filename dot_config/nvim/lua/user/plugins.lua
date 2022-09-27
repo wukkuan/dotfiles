@@ -144,6 +144,13 @@ return packer.startup(function(use)
 
   use('https://git.sr.ht/~whynothugo/lsp_lines.nvim')
 
+  use({
+    'luukvbaal/stabilize.nvim',
+    config = function()
+      require('stabilize').setup()
+    end,
+  })
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
