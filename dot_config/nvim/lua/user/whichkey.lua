@@ -82,6 +82,7 @@ local mappings = {
   g = {
     name = 'Git',
     s = { '<cmd>Neogit<CR>', 'Neogit status' },
+    l = { '<cmd>Gitsigns blame_line<cr>', 'Blame line' },
   },
 
   w = {
