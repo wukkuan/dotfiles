@@ -23,7 +23,7 @@ local mappings = {
   z = {
     name = 'Toggles',
     h = { '<cmd>nohlsearch<CR>', 'No Highlight' },
-    l = { '<cmd>lua require("lsp_lines").toggle()<CR>', 'LSP Lines' },
+    l = { require('lsp_lines').toggle, 'LSP Lines' },
   },
   f = {
     name = 'Files',
