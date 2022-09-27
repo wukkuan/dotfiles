@@ -7,7 +7,11 @@ local mappings = {
   ['b'] = {
     name = 'Buffers',
     b = {
-      "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+      function()
+        require('telescope.builtin').buffers(
+          require('telescope.themes').get_dropdown({ previewer = false })
+        )
+      end,
       'Buffers',
     },
     c = { '<cmd>Bdelete!<CR>', 'Close Buffer' },
@@ -27,7 +31,14 @@ local mappings = {
     name = 'Files',
     t = { '<cmd>let @* = expand("%")<cr>', 'Copy current filename' },
     ['/'] = {
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, path_display = {'smart'}})<cr>",
+      function()
+        require('telescope.builtin').find_files(
+          require('telescope.themes').get_dropdown({
+            previewer = false,
+            path_display = { 'smart' },
+          })
+        )
+      end,
       'Find files',
     },
     f = {
@@ -83,7 +94,7 @@ local mappings = {
 
   l = {
     name = 'LSP',
-    a = { '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Code Action' },
+    a = { vim.lsp.buf.code_action, 'Code Action' },
     --    d = {
     --      "<cmd>Telescope lsp_document_diagnostics<cr>",
     --      "Document Diagnostics",
@@ -123,7 +134,12 @@ local mappings = {
     k = { '<cmd>Telescope keymaps<cr>', 'Keymaps' },
     C = { '<cmd>Telescope commands<cr>', 'Commands' },
     F = {
-      "<cmd>lua require('telescope.builtin').live_grep({path_display = {'smart'}, theme='ivy'})<cr>",
+      function()
+        require('telescope.builtin').live_grep({
+          path_display = { 'smart' },
+          theme = 'ivy',
+        })
+      end,
       'Find Text',
     },
     f = { '<cmd>Telescope live_grep theme=ivy<cr>', 'Find Text' },
