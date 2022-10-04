@@ -1,6 +1,10 @@
 local h = require('harpoon')
 require('telescope').load_extension('harpoon')
-h.setup({})
+h.setup({
+  menu = {
+    width = vim.api.nvim_win_get_width(0) - 4,
+  },
+})
 
 local hui = require('harpoon.ui')
 local hmark = require('harpoon.mark')
