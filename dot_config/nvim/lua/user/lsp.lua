@@ -3,9 +3,26 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-require('lspconfig').flow.setup({
-  cmd = { 'node_modules/.bin/flow', 'lsp' },
-  capabilities = capabilities,
+vim.api.nvim_create_autocmd({ 'VimEnter', 'DirChanged' }, {
+  callback = function()
+    if string.find(vim.fn.getcwd(), '/workspace/web$') then
+      -- In the web repo we use flow, but we don't want to use that unless it's
+      -- really necessary.
+      local lspconfig_setup_options = {
+        cmd = { 'node_modules/.bin/flow', 'lsp' },
+        filetypes = {
+          'javascript',
+          'javascriptreact',
+          'javascript.jsx',
+          'typescript',
+          'tsx',
+        },
+        capabilities = capabilities,
+      }
+
+      require('lspconfig').flow.setup(lspconfig_setup_options)
+    end
+  end,
 })
 
 -- Run the following to stay up to date
