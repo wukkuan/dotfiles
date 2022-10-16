@@ -24,4 +24,7 @@ nvim_tree.setup({
     enable = true,
     show_on_dirs = true,
   },
+  view = {
+    adaptive_size = true,
+  },
 })
