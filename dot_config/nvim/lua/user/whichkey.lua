@@ -30,12 +30,20 @@ local mappings = {
     y = { '<cmd>let @* = expand("%")<cr>', 'Copy current filename' },
     ['/'] = {
       function()
-        require('telescope.builtin').find_files(
-          require('telescope.themes').get_dropdown({
-            previewer = false,
-            path_display = { 'smart' },
-          })
-        )
+        require('telescope.builtin').find_files({
+          sorter = require('telescope.sorters').get_fzy_sorter(),
+          path_display = {
+            'absolute',
+            shorten = {
+              len = 3,
+              exclude = { -1, -2, -3, -4, -5, -6, -7 },
+            },
+          },
+          layout_strategy = 'vertical',
+          layout_config = {
+            width = 0.9,
+          },
+        })
       end,
       'Find files',
     },
@@ -199,7 +207,6 @@ local mappings = {
             patterns = {}
             for p in string.gmatch(pattern, '[^,]+') do
               table.insert(patterns, p)
-              print('pattern', p)
             end
             require('telescope.builtin').live_grep({
               search_dirs = { dir },
