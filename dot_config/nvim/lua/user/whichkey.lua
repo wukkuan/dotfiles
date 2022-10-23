@@ -105,28 +105,6 @@ local mappings = {
     q = { '<C-w>q', 'quit window' },
   },
 
-  l = {
-    name = 'LSP',
-    a = { vim.lsp.buf.code_action, 'Code Action' },
-    s = { '<cmd>Telescope lsp_document_symbols<cr>', 'Document Symbols' },
-    S = {
-      '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>',
-      'Workspace Symbols',
-    },
-    r = { vim.lsp.buf.rename, 'Rename' },
-    f = { vim.lsp.buf.formatting, 'Format' },
-    i = { '<cmd>LspInfo<cr>', 'Info' },
-    j = {
-      vim.lsp.diagnostic.goto_next,
-      'Next Diagnostic',
-    },
-    k = {
-      vim.lsp.diagnostic.goto_prev,
-      'Prev Diagnostic',
-    },
-    q = { vim.lsp.diagnostic.set_loclist, 'Quickfix' },
-  },
-
   s = {
     name = 'Search',
     b = { '<cmd>Telescope git_branches<cr>', 'Checkout branch' },

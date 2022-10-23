@@ -31,14 +31,36 @@ vim.cmd([[
   autocmd BufWritePre *.js EslintFixAll
 ]])
 
+local wk = require('which-key')
+wk.register({
+  l = {
+    name = 'LSP',
+    a = { vim.lsp.buf.code_action, 'Code Action' },
+    d = { vim.lsp.buf.definition, 'Go to definition' },
+    D = { vim.lsp.buf.type_definition, 'Go to Type definition' },
+    s = { '<cmd>Telescope lsp_document_symbols<cr>', 'Document Symbols' },
+    S = {
+      '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>',
+      'Workspace Symbols',
+    },
+    r = { vim.lsp.buf.rename, 'Rename' },
+    R = { vim.lsp.buf.references, 'Rename' },
+    f = { vim.lsp.buf.formatting, 'Format' },
+    i = { '<cmd>LspInfo<cr>', 'Info' },
+    j = {
+      vim.lsp.diagnostic.goto_next,
+      'Next Diagnostic',
+    },
+    k = {
+      vim.lsp.diagnostic.goto_prev,
+      'Prev Diagnostic',
+    },
+  },
+}, { prefix = '<leader>' })
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
---vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
---vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
---vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
---vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -51,18 +73,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  --vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  --vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  --vim.keymap.set('n', '<space>wl', function()
-  --  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  --end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  --vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
