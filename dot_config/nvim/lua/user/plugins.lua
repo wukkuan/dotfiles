@@ -68,12 +68,7 @@ return packer.startup(function(use)
   use('folke/which-key.nvim')
 
   -- Colorschemes
-  use('lunarvim/colorschemes') -- A bunch of colorschemes you can try out
-  use('lunarvim/darkplus.nvim')
-  use('arcticicestudio/nord-vim')
   use('folke/tokyonight.nvim')
-  use('Mofiqul/vscode.nvim')
-  use('projekt0n/github-nvim-theme')
   use({ 'catppuccin/nvim', as = 'catppuccin' })
 
   use('lukas-reineke/indent-blankline.nvim')
