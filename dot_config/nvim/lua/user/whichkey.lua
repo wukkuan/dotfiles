@@ -110,12 +110,11 @@ local mappings = {
     b = { '<cmd>Telescope git_branches<cr>', 'Checkout branch' },
     c = { '<cmd>Telescope colorscheme<cr>', 'Colorscheme' },
     h = { '<cmd>Telescope help_tags<cr>', 'Find Help' },
-    M = { '<cmd>Telescope man_pages<cr>', 'Man Pages' },
     r = { '<cmd>Telescope oldfiles<cr>', 'Open Recent File' },
     R = { '<cmd>Telescope registers<cr>', 'Registers' },
     k = { '<cmd>Telescope keymaps<cr>', 'Keymaps' },
     C = { '<cmd>Telescope commands<cr>', 'Commands' },
-    F = {
+    f = {
       function()
         require('telescope.builtin').live_grep({
           path_display = { 'smart' },
@@ -123,29 +122,6 @@ local mappings = {
         })
       end,
       'Find Text',
-    },
-    f = { '<cmd>Telescope live_grep theme=ivy<cr>', 'Find Text' },
-    s = {
-      function()
-        local snap = require('snap')
-        -- snap.run({
-        --   producer = snap.get('producer.ripgrep.vimgrep'),
-        --   select = snap.get('select.vimgrep').select,
-        --   multiselect = snap.get('select.vimgrep').multiselect,
-        --   views = { snap.get('preview.vimgrep') },
-        -- })
-        snap.run({
-          producer = snap.get('consumer.fzf')(
-            snap.get('consumer.combine')(
-              snap.get('producer.ripgrep.file').args({}, './lua/user')
-            )
-          ),
-          select = snap.get('select.file').select,
-          multiselect = snap.get('select.file').multiselect,
-          views = { snap.get('preview.file') },
-        })
-      end,
-      'Snap Live Ripgrep',
     },
     z = {
       function()
