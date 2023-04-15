@@ -2,27 +2,27 @@
 -- to LSP servers.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-vim.api.nvim_create_autocmd({ 'VimEnter', 'DirChanged' }, {
-  callback = function()
-    if string.find(vim.fn.getcwd(), '/workspace/web$') then
-      -- In the web repo we use flow, but we don't want to use that unless it's
-      -- really necessary.
-      local lspconfig_setup_options = {
-        cmd = { 'node_modules/.bin/flow', 'lsp' },
-        filetypes = {
-          'javascript',
-          'javascriptreact',
-          'javascript.jsx',
-          'typescript',
-          'tsx',
-        },
-        capabilities = capabilities,
-      }
-
-      require('lspconfig').flow.setup(lspconfig_setup_options)
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd({ 'VimEnter', 'DirChanged' }, {
+--   callback = function()
+--     if string.find(vim.fn.getcwd(), '/workspace/web$') then
+--       -- In the web repo we use flow, but we don't want to use that unless it's
+--       -- really necessary.
+--       local lspconfig_setup_options = {
+--         cmd = { 'node_modules/.bin/flow', 'lsp' },
+--         filetypes = {
+--           'javascript',
+--           'javascriptreact',
+--           'javascript.jsx',
+--           'typescript',
+--           'tsx',
+--         },
+--         capabilities = capabilities,
+--       }
+--
+--       require('lspconfig').flow.setup(lspconfig_setup_options)
+--     end
+--   end,
+-- })
 
 -- Run the following to stay up to date
 -- npm update -g vscode-langservers-extracted
@@ -80,8 +80,8 @@ end
 local servers = {
   'pyright',
   'rust_analyzer',
-  'flow',
-  --  'tsserver',
+  --'flow',
+  -- 'tsserver',
 }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup({
@@ -92,3 +92,11 @@ for _, lsp in pairs(servers) do
     },
   })
 end
+
+require('lspconfig').tsserver.setup({
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+
+    client.server_capabilities.documentFormattingProvider = false
+  end,
+})
