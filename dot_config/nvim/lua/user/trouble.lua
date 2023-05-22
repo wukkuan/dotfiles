@@ -1,6 +1,8 @@
 local trouble = require('trouble')
 
-trouble.setup({})
+trouble.setup({
+  auto_close = true,
+})
 
 local wk = require('which-key')
 wk.register({

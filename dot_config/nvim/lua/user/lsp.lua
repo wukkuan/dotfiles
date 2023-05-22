@@ -24,6 +24,13 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 --   end,
 -- })
 
+-- Use internal formatting for bindings like gq. 
+ vim.api.nvim_create_autocmd('LspAttach', { 
+   callback = function(args) 
+     vim.bo[args.buf].formatexpr = nil 
+   end, 
+ })
+
 -- Run the following to stay up to date
 -- npm update -g vscode-langservers-extracted
 require('lspconfig').eslint.setup({})

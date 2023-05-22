@@ -1,6 +1,6 @@
 require('lualine').setup({
   sections = {
-    lualine_a = { 'branch', 'diff', 'diagnostics' },
+    lualine_a = { 'diff', 'diagnostics' },
     lualine_b = {},
     lualine_c = { { 'filename', path = 1 } },
     lualine_x = { 'filetype' },

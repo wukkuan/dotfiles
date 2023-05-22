@@ -73,3 +73,4 @@ keymap('x', '<A-k>', ":move '<-2<CR>gv-gv", opts)
 -- keymap("n", "<F8>", ":cn<CR>", opts)
 -- keymap("n", "<F10>", "@q", opts)
 -- keymap("n", "<F11>", "@w", opts)
+

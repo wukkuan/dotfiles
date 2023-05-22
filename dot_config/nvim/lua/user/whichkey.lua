@@ -15,6 +15,7 @@ local mappings = {
       'Buffers',
     },
     d = { '<cmd>Bdelete!<CR>', 'Close Buffer' },
+    m = { '<cmd>%bd|e#<CR>', 'Maximize (Close other)' },
   },
   ['q'] = {
     name = 'Macros',
@@ -24,6 +25,7 @@ local mappings = {
     name = 'Toggles',
     h = { '<cmd>nohlsearch<CR>', 'No Highlight' },
     l = { require('lsp_lines').toggle, 'LSP Lines' },
+    q = { '<cmd>cclose<CR>', 'Close Quickfix' },
   },
   f = {
     name = 'Files',
