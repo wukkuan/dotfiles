@@ -137,6 +137,10 @@ return packer.startup(function(use)
   -- Git
   use({ 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' })
   use('lewis6991/gitsigns.nvim')
+  use({
+    'ruifm/gitlinker.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+  })
 
   use('https://git.sr.ht/~whynothugo/lsp_lines.nvim')
 
@@ -147,7 +151,11 @@ return packer.startup(function(use)
     end,
   })
 
+  use('chentoast/marks.nvim')
+
   use('RRethy/vim-illuminate')
+
+  use('epwalsh/obsidian.nvim')
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

@@ -3,6 +3,17 @@ if not status_ok then
   return
 end
 
+local function goto_window(winnum)
+  local winlist = vim.api.nvim_list_wins()
+  for _, winid in ipairs(winlist) do
+    if vim.api.nvim_win_get_number(winid) == winnum then
+      vim.api.nvim_set_current_win(winid)
+      return
+    end
+  end
+  print('Window ' .. winnum .. ' not found')
+end
+
 local mappings = {
   ['b'] = {
     name = 'Buffers',
@@ -71,6 +82,18 @@ local mappings = {
       '<cmd>source %<cr>',
       ':source %',
     },
+    d = {
+      function()
+        local answer = vim.fn.confirm("Do you want to delete this file?", "&Yes\n&No", 0)
+        if answer == 1 then
+          local filename = vim.fn.expand('%:p')  -- get the full path of the file
+          local escaped_filename = vim.fn.shellescape(filename)  -- escape special characters
+          os.execute('rm ' .. escaped_filename)
+          vim.cmd('bd')
+        end
+      end,
+      'Delete file'
+    }
   },
   t = { '<cmd>Telescope resume<cr>', 'Telescope resume' },
 
@@ -105,6 +128,14 @@ local mappings = {
     s = { '<C-w>s', 'split horizontal ' },
     ['='] = { '<C-w>=', 'balance splits' },
     q = { '<C-w>q', 'quit window' },
+    ['1'] = { function() goto_window(1) end, 'go to 1' },
+    ['2'] = { function() goto_window(2) end, 'go to 2' },
+    ['3'] = { function() goto_window(3) end, 'go to 3' },
+    ['4'] = { function() goto_window(4) end, 'go to 4' },
+    ['5'] = { function() goto_window(5) end, 'go to 5' },
+    ['6'] = { function() goto_window(6) end, 'go to 6' },
+    ['7'] = { function() goto_window(7) end, 'go to 7' },
+    ['8'] = { function() goto_window(8) end, 'go to 8' },
   },
 
   s = {
