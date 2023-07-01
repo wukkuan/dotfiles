@@ -119,7 +119,10 @@ return packer.startup(function(use)
 
   use('phaazon/hop.nvim')
 
-  use('j-hui/fidget.nvim')
+  use({
+    'j-hui/fidget.nvim',
+    tag = 'legacy',
+  })
 
   use({
     'akinsho/bufferline.nvim',
@@ -156,6 +159,10 @@ return packer.startup(function(use)
   use('RRethy/vim-illuminate')
 
   use('epwalsh/obsidian.nvim')
+
+  use('kylechui/nvim-surround')
+
+  use('beauwilliams/focus.nvim')
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

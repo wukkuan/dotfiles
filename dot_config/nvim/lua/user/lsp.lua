@@ -77,8 +77,8 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gD', '<cmd>Trouble lsp_type_definitions<cr>', bufopts)
+  vim.keymap.set('n', 'gd', '<cmd>Trouble lsp_definitions<cr>', bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
 end
 
@@ -106,4 +106,16 @@ require('lspconfig').tsserver.setup({
 
     client.server_capabilities.documentFormattingProvider = false
   end,
+  settings = {
+    typescript = {
+      suggest = {
+        noUnusedParameters = false,
+      },
+    },
+    typescriptreact = {
+      suggest = {
+        noUnusedParameters = false,
+      },
+    },
+  }
 })
