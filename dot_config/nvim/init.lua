@@ -28,5 +28,4 @@ require('user.lualine')
 require('user.marks')
 require('user.obsidian')
 require('user.nvim-surround')
-require('user.focus')
 
