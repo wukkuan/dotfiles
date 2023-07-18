@@ -34,6 +34,7 @@ local options = {
   sidescrolloff = 4,
   guifont = 'FiraCode Nerd Font Mono', -- the font used in graphical neovim applications
   colorcolumn = { 80 }, -- vertical column to show where wrapping should occur
+  sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 }
 
 vim.opt.shortmess:append('c')
