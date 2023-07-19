@@ -100,7 +100,9 @@ for _, lsp in pairs(servers) do
   })
 end
 
+local cmpNvimLspCapabilities = require('cmp_nvim_lsp').default_capabilities()
 require('lspconfig').tsserver.setup({
+  capabilities = cmpNvimLspCapabilities,
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
 
