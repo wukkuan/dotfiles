@@ -26,7 +26,8 @@ local mappings = {
       'Buffers',
     },
     d = { '<cmd>Bdelete!<CR>', 'Close Buffer' },
-    m = { '<cmd>%bd|e#<CR>', 'Maximize (Close other)' },
+    m = { '<cmd>BufferLineGroupClose ungrouped<cr>', 'Maximize' },
+    p = { '<cmd>BufferLineTogglePin<cr>', 'Toggle pin' },
   },
   ['q'] = {
     name = 'Macros',
@@ -127,7 +128,7 @@ local mappings = {
     v = { '<C-w>v', 'split vertical ' },
     s = { '<C-w>s', 'split horizontal ' },
     ['='] = { '<C-w>=', 'balance splits' },
-    q = { '<C-w>q', 'quit window' },
+    d = { '<C-w>q', 'quit window' },
     ['1'] = { function() goto_window(1) end, 'go to 1' },
     ['2'] = { function() goto_window(2) end, 'go to 2' },
     ['3'] = { function() goto_window(3) end, 'go to 3' },
