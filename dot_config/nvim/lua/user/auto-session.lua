@@ -6,4 +6,4 @@ require('which-key').register({
   p = {
     s = { require("auto-session.session-lens").search_session, 'Auto Session' },
   }
-})
+}, require('user.whichkey').opts)
