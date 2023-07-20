@@ -192,6 +192,22 @@ local mappings = {
       'Fancy live grep',
     },
   },
+
+  v = {
+    name = 'NeoVim',
+    q = { '<cmd>qa<cr>', 'Quit' },
+    Q = {
+      function()
+        local answer = vim.fn.confirm("Do you really want to save and cq?", "&Yes\n&No", 2)
+
+        if answer == 1 then
+            vim.cmd("wa")
+            vim.cmd("cq")
+        end
+      end,
+      'Save and :cq',
+    },
+  },
 }
 
 local setup = {
