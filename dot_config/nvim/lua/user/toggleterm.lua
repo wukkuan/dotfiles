@@ -3,7 +3,9 @@ if not status_ok then
   return
 end
 
-toggleterm.setup({})
+toggleterm.setup({
+  open_mapping = [[c-`]]
+})
 
 local toggleterm_group = vim.api.nvim_create_augroup('Toggleterm', {})
 vim.api.nvim_create_autocmd('TermOpen', {
@@ -21,9 +23,7 @@ vim.api.nvim_create_autocmd('TermOpen', {
 })
 
 require('which-key').register({
-  c = {
+  p = {
     c = { '<cmd>ToggleTerm<cr>', 'Toggle terminal' },
-    -- equivalent to typing `2:ToggleTerm`
-    n = { '<cmd>.,.+1ToggleTerm<cr>', 'New terminal' },
   }
 }, require('user.whichkey').opts)
