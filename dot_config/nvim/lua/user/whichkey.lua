@@ -61,20 +61,6 @@ local mappings = {
       end,
       'Find files',
     },
-    f = {
-      function()
-        local snap = require('snap')
-        snap.run({
-          producer = snap.get('consumer.fzy')(
-            snap.get('producer.ripgrep.file')
-          ),
-          select = snap.get('select.file').select,
-          multiselect = snap.get('select.file').multiselect,
-          views = { snap.get('preview.file') },
-        })
-      end,
-      'Find files with snap',
-    },
     w = {
       '<cmd>w<cr>',
       'Write',

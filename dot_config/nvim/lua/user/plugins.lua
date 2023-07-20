@@ -55,7 +55,6 @@ return packer.startup(function(use)
   use('kyazdani42/nvim-web-devicons')
   use('kyazdani42/nvim-tree.lua')
   use('sbdchd/neoformat')
-  --use "akinsho/bufferline.nvim"
   use('moll/vim-bbye')
   use('nvim-lualine/lualine.nvim')
   use "akinsho/toggleterm.nvim"
@@ -95,10 +94,6 @@ return packer.startup(function(use)
 
   -- Telescope
   use('nvim-telescope/telescope.nvim')
-  use({
-    'camspiers/snap',
-    rocks = { 'fzy' },
-  })
 
   -- Harpoon
   use('ThePrimeagen/harpoon')
