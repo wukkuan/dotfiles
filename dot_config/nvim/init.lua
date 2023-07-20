@@ -29,4 +29,5 @@ require('user.marks')
 require('user.obsidian')
 require('user.nvim-surround')
 require('user.auto-session')
+require('user.toggleterm')
 
