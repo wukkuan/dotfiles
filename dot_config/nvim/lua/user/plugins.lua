@@ -51,13 +51,21 @@ return packer.startup(function(use)
   use('wbthomason/packer.nvim') -- Have packer manage itself
   use('nvim-lua/popup.nvim') -- An implementation of the Popup API from vim in Neovim
   use('nvim-lua/plenary.nvim') -- Useful lua functions used ny lots of plugins
+  use('rcarriga/nvim-notify')
+  use({
+    'folke/noice.nvim',
+    requires = {
+      'MunifTanjim/nui.nvim',
+      'rcarriga/nvim-notify',
+    },
+  })
   use('numToStr/Comment.nvim') -- Easily comment stuff
   use('kyazdani42/nvim-web-devicons')
   use('kyazdani42/nvim-tree.lua')
   use('sbdchd/neoformat')
   use('moll/vim-bbye')
   use('nvim-lualine/lualine.nvim')
-  use "akinsho/toggleterm.nvim"
+  use('akinsho/toggleterm.nvim')
   --use "ahmedkhalf/project.nvim"
 
   use('lewis6991/impatient.nvim')
@@ -161,6 +169,8 @@ return packer.startup(function(use)
   use('beauwilliams/focus.nvim')
 
   use('rmagatti/auto-session')
+
+  use('folke/flash.nvim')
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
