@@ -34,10 +34,13 @@ matches:
         params:
           cmd: "echo 'Hello from your shell'"
 
-  - trigger: ",seml"
-    replace: "william.blasko@sigmacomputing.com"
+  - trigger: ",uem"
+    replace: "blasko@uber.com"
 
-  - trigger: ",eml"
+  - trigger: ",ui"
+    replace: ".uberinternal.com"
+
+  - trigger: ",em"
     replace: "william@williamblasko.com"
 
   - trigger: ",ssf"
