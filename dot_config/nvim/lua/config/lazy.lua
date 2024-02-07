@@ -59,8 +59,19 @@ require('lazy').setup({
     --{ import = 'lazyvim.plugins.extras.coding.yanky' },
     --{ import = 'lazyvim.plugins.extras.formatting.prettier' },
     --{ import = 'lazyvim.plugins.extras.ui.mini-animate' },
+
     -- import/override with your plugins
-    { import = 'plugins' },
+    { import = 'plugins/colorscheme' },
+    { import = 'plugins/conform' },
+    { import = 'plugins/example' },
+    { import = 'plugins/harpoon' },
+    { import = 'plugins/noice' },
+    { import = 'plugins/nvim-cmp' },
+    { import = 'plugins/obsidian' },
+    { import = 'plugins/telescope' },
+    { import = 'plugins/typescript' },
+    { import = 'plugins/which-key' },
+    { import = 'plugins/neogit' },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
