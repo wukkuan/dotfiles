@@ -72,6 +72,7 @@ require('lazy').setup({
     { import = 'plugins/typescript' },
     { import = 'plugins/which-key' },
     { import = 'plugins/neogit' },
+    { import = 'plugins/sourcegraph' },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
