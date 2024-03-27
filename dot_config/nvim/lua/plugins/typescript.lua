@@ -30,6 +30,9 @@ return {
           end
         end,
       },
+      flags = {
+        debounce_text_changes = 500,
+      },
     },
   },
 }
