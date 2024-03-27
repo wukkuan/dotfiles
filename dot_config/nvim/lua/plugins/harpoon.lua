@@ -11,6 +11,11 @@ end
 
 return {
   'ThePrimeagen/harpoon',
+  opts = {
+    menu = {
+      width = vim.api.nvim_win_get_width(0) - 4,
+    },
+  },
   keys = {
     { '<leader>mm', hui('toggle_quick_menu'), desc = 'Quick menu' },
     { '<leader>ma', hmark('add_file'), desc = 'Add file mark' },
